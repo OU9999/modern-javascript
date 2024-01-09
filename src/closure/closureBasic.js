@@ -1,13 +1,15 @@
 const x = 1;
 
-const outerFn = () => {
+const outer = () => {
   const x = 10;
-  innerFn();
+  const inner = () => console.log(x);
+  return inner;
 };
 
-outerFn();
+const innerFn = outer();
 innerFn();
 
 /*
-답은 둘다 1이다.이와 같은 현상이 발생하는 이유는 자바스크립트가 렉시컬 스코프를 따르는 프로그래밍 언어이기 때문이다.
-*/
+외부 함수보다 중첩 함수가 더 오래 유지되는 경우 중첩 함수는 이미 생명 주기가 종료 한 외부 함수의
+변수를 참조할 수 있다. 이러한 중첩 함수를 클로저(closure) 라고 부른다.
+ */
